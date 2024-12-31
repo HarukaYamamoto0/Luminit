@@ -1,12 +1,43 @@
 {
   "name": "luminit",
-  "description": "",
-  "version": "1.0.0",
-  "main": "index.js",
+  "description": "Luminit: A simple tray-based application for controlling screen brightness on Linux.",
+  "version": "0.1.0",
+  "main": "src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make && sudo apt install /home/harukadev/Documents/github/Luminit/out/make/luminit_0.1.0_amd64.deb"
   },
-  "keywords": [],
-  "author": "HarukaYamomoto0 <harukayamamotodev@gmail.com>",
-  "license": "MIT"
+  "devDependencies": {
+    "@electron-forge/cli": "^7.6.0",
+    "@electron-forge/maker-deb": "^7.6.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.6.0",
+    "@electron-forge/plugin-fuses": "^7.6.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^33.2.1"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.1"
+  },
+  "author": {
+    "name": "HarukaYamamoto0",
+    "email": "harukayamamotodev@gmail.com",
+    "url": "https://harukadev.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "brightness",
+    "tray",
+    "electron",
+    "linux",
+    "luminit"
+  ],
+  "homepage": "https://github.com/HarukaYamamoto0/luminit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HarukaYamamoto0/luminit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HarukaYamamoto0/luminit/issues"
+  }
 }
