@@ -14,6 +14,7 @@ export const makers = [
       options: {
         icon: "./assets/iconTemplate.png",
         productName: "Luminit",
+        depends: ["x11-xserver-utils"],
       },
     },
   },

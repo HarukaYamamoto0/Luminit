@@ -1,22 +1,34 @@
 import { Menu, shell } from "electron";
+import BrightnessController from "./BrightnessController.js";
+
+const controller = new BrightnessController();
 
 function render(tray = tray) {
   const contextMenu = Menu.buildFromTemplate([
     {
       label: "Increase brightness by 10%",
       type: "normal",
-      click: () => console.log("Increasing brightness"),
+      click: async () => {
+        const level = await controller.getLevel();
+        await controller.setLevel(level + 10);
+      },
     },
     {
       label: "Decrease brightness by 10%",
       type: "normal",
-      click: () => console.log("Decreasing brightness"),
+      click: async () => {
+        const level = await controller.getLevel();
+        await controller.setLevel(level - 10);
+      },
     },
     {
       label: "Preset Brightness Levels",
       submenu: generateLevelsOfLight(
-        (level) => console.log(`Brightness set to ${level}%`),
+        async (level) => {
+          await controller.setLevel(level);
+        },
         100,
+        10,
         10
       ),
     },
@@ -63,10 +75,10 @@ function render(tray = tray) {
   tray.setContextMenu(contextMenu);
 }
 
-function generateLevelsOfLight(onClick, maxLevel, step) {
+function generateLevelsOfLight(onClick, maxLevel, minLevel, step) {
   const subMenu = [];
 
-  for (let level = 0; level <= maxLevel; level += step) {
+  for (let level = minLevel; level <= maxLevel; level += step) {
     const option = {
       label: `${level}%`,
       type: "radio",
