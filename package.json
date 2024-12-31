@@ -13,6 +13,7 @@
     "make": "electron-forge make"
   },
   "devDependencies": {
+    "nodemon": "^3.1.9",
     "@biomejs/biome": "1.9.4",
     "@electron-forge/cli": "^7.6.0",
     "@electron-forge/maker-deb": "^7.6.0",
@@ -25,8 +26,7 @@
     "globals": "^15.14.0"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1",
-    "nodemon": "^3.1.9"
+    "electron-squirrel-startup": "^1.0.1"
   },
   "author": {
     "name": "HarukaYamamoto0",
@@ -34,7 +34,13 @@
     "url": "https://harukadev.com"
   },
   "license": "MIT",
-  "keywords": ["brightness", "tray", "electron", "linux", "luminit"],
+  "keywords": [
+    "brightness",
+    "tray",
+    "electron",
+    "linux",
+    "luminit"
+  ],
   "homepage": "https://github.com/HarukaYamamoto0/luminit",
   "repository": {
     "type": "git",

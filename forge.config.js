@@ -1,19 +1,26 @@
-import { FusesPlugin } from '@electron-forge/plugin-fuses';
-import { FuseV1Options, FuseVersion } from '@electron/fuses';
+import { FusesPlugin } from "@electron-forge/plugin-fuses";
+import { FuseV1Options, FuseVersion } from "@electron/fuses";
 
 export const packagerConfig = {
   asar: true,
+  executableName: "luminit",
 };
 export const rebuildConfig = {};
 export const makers = [
   {
-    name: '@electron-forge/maker-deb',
-    config: {},
+    name: "@electron-forge/maker-deb",
+    executableName: "luminit",
+    config: {
+      options: {
+        icon: "./assets/iconTemplate.png",
+        productName: "Luminit",
+      },
+    },
   },
 ];
 export const plugins = [
   {
-    name: '@electron-forge/plugin-auto-unpack-natives',
+    name: "@electron-forge/plugin-auto-unpack-natives",
     config: {},
   },
   new FusesPlugin({
