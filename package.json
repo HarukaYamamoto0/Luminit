@@ -5,16 +5,22 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron-forge start",
+    "lint": "biome lint --write *",
+    "format": "biome format --write *",
     "package": "electron-forge package",
     "make": "electron-forge make && sudo apt install /home/harukadev/Documents/github/Luminit/out/make/luminit_0.1.0_amd64.deb"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@electron-forge/cli": "^7.6.0",
     "@electron-forge/maker-deb": "^7.6.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.6.0",
     "@electron-forge/plugin-fuses": "^7.6.0",
     "@electron/fuses": "^1.8.0",
-    "electron": "^33.2.1"
+    "@eslint/js": "^9.17.0",
+    "electron": "^33.2.1",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1"
@@ -25,13 +31,7 @@
     "url": "https://harukadev.com"
   },
   "license": "MIT",
-  "keywords": [
-    "brightness",
-    "tray",
-    "electron",
-    "linux",
-    "luminit"
-  ],
+  "keywords": ["brightness", "tray", "electron", "linux", "luminit"],
   "homepage": "https://github.com/HarukaYamamoto0/luminit",
   "repository": {
     "type": "git",
