@@ -1,34 +1,26 @@
-import { Notification } from "electron";
 import { exec as execCallback } from "child_process";
 import util from "util";
+import { store } from "./store.js";
 
 const exec = util.promisify(execCallback);
 
 class BrightnessController {
   constructor() {
     this.monitors = [];
-  }
-  detectXrandr() {
-    try {
-      exec("xrandr --listactivemonitors", (err, stdout) => {
-        if (!err && stdout.includes("Monitors")) {
-          const monitors = stdout.split("\n\n");
-          this.monitors = monitors;
-          console.log(this.monitors);
-          return "xrandr";
-        }
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    this.store = store;
+
+    this.setLevel(store.get("currentLevel"));
   }
 
   async getLevel() {
-    return this.getXrandrBrightness();
+    const level = await this.getXrandrBrightness();
+    store.set("currentLevel", level);
+    return level;
   }
 
   async setLevel(level) {
-    return this.setXrandrBrightness(level);
+    this.setXrandrBrightness(level);
+    store.set("currentLevel", level);
   }
 
   async getXrandrBrightness() {
@@ -59,20 +51,13 @@ class BrightnessController {
         const monitorName = monitor.match(/^\s*\d+\s*:\s*\+\*?([^\s]+)/m)[1];
 
         if (monitorName) {
-          const { stdout, stderr } = await exec(
-            `xrandr --output ${monitorName} --brightness ${level / 100}`
+          const { stderr } = await exec(
+            `xrandr --output ${monitorName} --brightness ${Math.min(
+              level / 100,
+              1
+            )}`
           );
           if (stderr) new Error(stderr);
-
-          if (stdout) {
-            const NOTIFICATION_TITLE = "Basic Notification";
-            const NOTIFICATION_BODY = "Notification from the Main process";
-
-            new Notification({
-              title: NOTIFICATION_TITLE,
-              body: NOTIFICATION_BODY,
-            }).show();
-          }
         }
       }
     } catch (error) {
