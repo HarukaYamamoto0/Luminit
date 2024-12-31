@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luminit Settings</title>
+    <link rel="stylesheet" href="./settings.styles.css" />
+  </head>
+  <body>
+    <div class="settings-container">
+      <div class="settings-header">Luminit Settings</div>
+
+      <div class="setting">
+        <label for="launch-startup">Launch at Startup</label>
+        <select id="launch-startup">
+          <option value="true">Enable</option>
+          <option value="false">Disabled</option>
+        </select>
+      </div>
+
+      <div class="setting">
+        <label for="theme-select">Select Theme</label>
+        <select id="theme-select">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+
+      <div class="setting">
+        <label for="language-select">Language</label>
+        <select id="language-select">
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
+
+      <div class="setting">
+        <label for="shortcut-increase">Shortcut to Increase Brightness</label>
+        <input type="text" id="shortcut-increase" placeholder="e.g., Ctrl+Up" />
+      </div>
+      <div class="setting">
+        <label for="shortcut-decrease">Shortcut to Decrease Brightness</label>
+        <input
+          type="text"
+          id="shortcut-decrease"
+          placeholder="e.g., Ctrl+Down"
+        />
+      </div>
+
+      <div class="setting">
+        <label for="enable-notifications">Enable Notifications</label>
+        <select id="enable-notifications">
+          <option value="true">Enable</option>
+          <option value="false">Disabled</option>
+        </select>
+      </div>
+
+      <div class="setting">
+        <label for="auto-brightness">Enable Auto-Brightness</label>
+        <select id="enable-notifications">
+          <option value="true">Enable</option>
+          <option value="false">Disabled</option>
+        </select>
+      </div>
+
+      <div class="setting">
+        <label for="morning-brightness">Morning Brightness Level</label>
+        <input
+          type="number"
+          id="morning-brightness"
+          min="0"
+          max="100"
+          step="1"
+          value="70"
+        />
+      </div>
+
+      <div class="setting">
+        <label for="evening-brightness">Evening Brightness Level</label>
+        <input
+          type="number"
+          id="evening-brightness"
+          min="0"
+          max="100"
+          step="1"
+          value="40"
+        />
+      </div>
+
+      <div class="setting">
+        <label for="min-brightness">Min Brightness</label>
+        <input
+          type="number"
+          id="min-brightness"
+          min="0"
+          max="100"
+          step="1"
+          value="10"
+        />
+      </div>
+
+      <div class="setting">
+        <label for="max-brightness">Max Brightness</label>
+        <input
+          type="number"
+          id="max-brightness"
+          min="0"
+          max="100"
+          step="1"
+          value="100"
+        />
+      </div>
+
+      <div class="setting">
+        <label for="step-brightness">Step Brightness</label>
+        <input
+          type="number"
+          id="step-brightness"
+          min="1"
+          max="50"
+          step="1"
+          value="10"
+        />
+      </div>
+
+      <div class="setting">
+        <button id="reset-settings">Reset to Default Settings</button>
+      </div>
+
+      <div class="help-links">
+        <a href="https://github.com/HarukaYamamoto0/Luminit" target="_blank"
+          >Documentation</a
+        >
+        |
+        <a
+          href="https://github.com/HarukaYamamoto0/Luminit/issues"
+          target="_blank"
+          >Report an Issue</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

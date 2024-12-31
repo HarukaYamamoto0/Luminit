@@ -1,0 +1,90 @@
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f5;
+  color: #333;
+}
+
+.settings-container {
+  max-width: 500px;
+  margin: 50px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+}
+
+.settings-header {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #4a4a4a;
+}
+
+.setting {
+  margin-bottom: 20px;
+}
+
+.setting label {
+  font-size: 1rem;
+  color: #555;
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.setting input[type="text"],
+.setting input[type="number"],
+.setting select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.setting input[type="text"]:focus,
+.setting input[type="number"]:focus,
+.setting select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+button#reset-settings {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button#reset-settings:hover {
+  background-color: #0056b3;
+}
+
+.help-links {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.help-links a {
+  text-decoration: none;
+  color: #007bff;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.help-links a:hover {
+  color: #0056b3;
+}

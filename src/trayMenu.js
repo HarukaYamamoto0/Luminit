@@ -1,12 +1,13 @@
 import { Menu, shell } from "electron";
 import BrightnessController from "./BrightnessController.js";
+import { createSettingsWindow } from "./screens/settingsScreen.js";
 
 const controller = new BrightnessController();
 
-function render(tray = tray) {
+function trayMenu(tray = tray) {
   const contextMenu = Menu.buildFromTemplate([
     {
-      label: "Increase brightness by 10%",
+      label: "Increase 10%",
       type: "normal",
       click: async () => {
         const level = await controller.getLevel();
@@ -14,7 +15,7 @@ function render(tray = tray) {
       },
     },
     {
-      label: "Decrease brightness by 10%",
+      label: "Decrease 10%",
       type: "normal",
       click: async () => {
         const level = await controller.getLevel();
@@ -36,15 +37,27 @@ function render(tray = tray) {
       label: "Settings",
       submenu: [
         {
-          label: "Open Settings",
+          label: "Open all settings",
           type: "normal",
-          click: () => console.log("Opening settings window"),
+          click: () => createSettingsWindow(),
         },
         {
           label: "Launch at Startup",
           type: "checkbox",
           checked: true,
           click: () => console.log("Toggling startup option"),
+        },
+        {
+          label: "Enable Notifications",
+          type: "checkbox",
+          checked: true,
+          click: () => console.log("Enable Notifications"),
+        },
+        {
+          label: "Reset to Default",
+          type: "normal",
+          checked: true,
+          click: () => console.log("Reset to Default"),
         },
       ],
     },
@@ -91,4 +104,4 @@ function generateLevelsOfLight(onClick, maxLevel, minLevel, step) {
   return subMenu;
 }
 
-export default render;
+export default trayMenu;

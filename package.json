@@ -27,7 +27,8 @@
   },
   "dependencies": {
     "brightness": "^3.0.0",
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-store": "^10.0.0"
   },
   "author": {
     "name": "HarukaYamamoto0",
