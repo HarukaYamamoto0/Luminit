@@ -1,30 +1,32 @@
-import { app, BrowserWindow } from "electron/main";
-import path from "node:path";
+import { app, Tray, Menu } from "electron";
+import { resolve } from "node:path";
 
-function createWindow() {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+const __dirname = import.meta.dirname;
+let tray = {};
+
+function render(tray = tray) {
+  const contextMenu = Menu.buildFromTemplate([
+    { label: "Item1", type: "radio" },
+    { label: "Item2", type: "radio" },
+    { label: "Item3", type: "radio", checked: true },
+    { label: "Item4", type: "radio" },
+    {
+      type: "separator",
     },
-  });
+    {
+      type: "normal",
+      label: "Quit",
+      role: "quit",
+      enabled: true,
+    },
+  ]);
 
-  win.loadFile(path.join(__dirname, "index.html"));
+  tray.setToolTip("This is my application.");
+  tray.setContextMenu(contextMenu);
 }
 
-app.whenReady().then(() => {
-  createWindow();
+app.on("ready", () => {
+  tray = new Tray(resolve(__dirname, "../assets", "iconTemplate.png"));
 
-  app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
-  });
-});
-
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+  render(tray);
 });

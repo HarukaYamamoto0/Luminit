@@ -6,10 +6,11 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron-forge start",
+    "dev": "nodemon --exec electron .",
     "lint": "biome lint --write *",
     "format": "biome format --write *",
     "package": "electron-forge package",
-    "make": "electron-forge make && sudo apt install /home/harukadev/Documents/github/Luminit/out/make/luminit_0.1.0_amd64.deb"
+    "make": "electron-forge make"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -24,7 +25,8 @@
     "globals": "^15.14.0"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-squirrel-startup": "^1.0.1",
+    "nodemon": "^3.1.9"
   },
   "author": {
     "name": "HarukaYamamoto0",
@@ -32,13 +34,7 @@
     "url": "https://harukadev.com"
   },
   "license": "MIT",
-  "keywords": [
-    "brightness",
-    "tray",
-    "electron",
-    "linux",
-    "luminit"
-  ],
+  "keywords": ["brightness", "tray", "electron", "linux", "luminit"],
   "homepage": "https://github.com/HarukaYamamoto0/luminit",
   "repository": {
     "type": "git",
