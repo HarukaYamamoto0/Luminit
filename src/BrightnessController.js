@@ -1,67 +1,75 @@
-import { exec as execCallback } from "child_process";
-import util from "util";
 import { store } from "./store.js";
+import execShellCommand from "./utils/execShellCommand.js";
 
-const exec = util.promisify(execCallback);
-
+/**
+ * Class responsible for controlling monitor brightness levels.
+ */
 class BrightnessController {
-  constructor() {
-    this.monitors = [];
-    this.store = store;
+  /**
+   * Retrieves the brightness levels of all connected monitors.
+   *
+   * @returns {Promise<number[]>} A list containing the brightness levels of each monitor as a percentage (0-100).
+   * @throws {Error} Throws an error if no brightness levels are detected for active monitors.
+   */
+  static async getLevel() {
+    try {
+      const stdout = await execShellCommand("xrandr --verbose");
+      const monitors = stdout.split("\n\n");
 
-    this.setLevel(store.get("currentLevel"));
-  }
+      const brightnessValues = [];
 
-  async getLevel() {
-    const level = await this.getXrandrBrightness();
-    store.set("currentLevel", level);
-    return level;
-  }
-
-  async setLevel(level) {
-    this.setXrandrBrightness(level);
-    store.set("currentLevel", level);
-  }
-
-  async getXrandrBrightness() {
-    const { stdout, stderr } = await exec("xrandr --verbose");
-    if (stderr)
-      new Error(
-        "Nenhum brilho detectado nos monitores ativos." + "\n" + stderr
-      );
-
-    const monitors = stdout.split("\n\n");
-
-    for (const monitor of monitors) {
-      const brightnessMatch = monitor.match(/Brightness:\s*(\d+\.\d+)/m);
-      if (brightnessMatch) {
-        return parseFloat(brightnessMatch[1]) * 100;
+      for (const monitor of monitors) {
+        const brightnessMatch = monitor.match(/Brightness:\s*(\d+\.\d+)/m);
+        if (brightnessMatch) {
+          brightnessValues.push(parseFloat(brightnessMatch[1]) * 100);
+        }
       }
+
+      if (brightnessValues.length === 0) {
+        throw new Error("No brightness levels detected for active monitors.");
+      }
+
+      store.set("currentLevel", brightnessValues[0]);
+
+      return brightnessValues;
+    } catch (error) {
+      console.error(
+        "Error retrieving monitor brightness levels:",
+        error.message
+      );
+      throw error;
     }
   }
 
-  async setXrandrBrightness(level) {
+  /**
+   * Sets the brightness level for all connected monitors.
+   *
+   * @param {number} level - The desired brightness level as a percentage (0-100).
+   * @returns {Promise<void>} Resolves when the brightness level is successfully set.
+   * @throws {Error} Throws an error if setting the brightness fails.
+   */
+  static async setLevel(level) {
     try {
-      const { stdout, stderr } = await exec("xrandr --listactivemonitors");
-      if (stderr) new Error(stderr);
+      const stdout = await execShellCommand(
+        "xrandr | grep -w connected | cut -f '1' -d ' '"
+      );
 
-      const monitors = stdout.split("\n\n");
+      const monitorNames = stdout.split("\n").filter(Boolean);
 
-      for (const monitor of monitors) {
-        const monitorName = monitor.match(/^\s*\d+\s*:\s*\+\*?([^\s]+)/m)[1];
-
-        if (monitorName) {
-          const { stderr } = await exec(
-            `xrandr --output ${monitorName} --brightness ${Math.min(
-              level / 100,
-              1
-            )}`
-          );
-          if (stderr) new Error(stderr);
-        }
+      for (const monitorName of monitorNames) {
+        // Sets the brightness level for each monitor, ensuring it's clamped between 0 and 1.
+        await execShellCommand(
+          `xrandr --output ${monitorName} --brightness ${Math.min(
+            level / 100,
+            1
+          )}`
+        );
       }
+
+      store.set("currentLevel", level);
     } catch (error) {
-      console.error(error);
+      console.error("Error setting monitor brightness levels:", error.message);
+      throw error;
     }
   }
 }

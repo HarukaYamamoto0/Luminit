@@ -4,42 +4,16 @@ const schema = {
   currentLevel: {
     type: "number",
     maximum: 100,
-    minimum: 1,
+    minimum: 0,
     default: 100,
   },
   launchAStartup: {
     type: "boolean",
     default: true,
   },
-  isdarkTheme: {
-    type: "boolean",
-    default: false,
-  },
-  language: {
-    type: "string",
-    default: "English",
-  },
-  shortcutToIncrease: {
-    type: "string",
-  },
-  shortcutToDecrease: {
-    type: "string",
-  },
   notifications: {
     type: "boolean",
-    default: false,
-  },
-  morningBrightnessLevel: {
-    type: "number",
-    maximum: 100,
-    minimum: 1,
-    default: 50,
-  },
-  eveningBrightnessLevel: {
-    type: "number",
-    maximum: 100,
-    minimum: 1,
-    default: 50,
+    default: true,
   },
   minLevel: {
     type: "number",

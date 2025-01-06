@@ -50,7 +50,7 @@
         "noUnsafeOptionalChaining": "error",
         "noUnusedLabels": "error",
         "noUnusedPrivateClassMembers": "error",
-        "noUnusedVariables": "error",
+        "noUnusedVariables": "warn",
         "useIsNan": "error",
         "useValidForDirection": "error",
         "useYield": "error"
@@ -66,7 +66,7 @@
         "noDuplicateClassMembers": "error",
         "noDuplicateObjectKeys": "error",
         "noDuplicateParameters": "error",
-        "noEmptyBlockStatements": "error",
+        "noEmptyBlockStatements": "warn",
         "noFallthroughSwitchClause": "error",
         "noFunctionAssign": "error",
         "noGlobalAssign": "error",

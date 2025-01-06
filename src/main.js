@@ -1,18 +1,20 @@
-import { app, Tray, globalShortcut } from "electron";
-import { resolve } from "node:path";
-import trayMenu from "./trayMenu.js";
+import { app, globalShortcut } from "electron";
+import { Luminit } from "./Luminit.js";
 import BrightnessController from "./BrightnessController.js";
+import { store } from "./store.js";
+import toggleAutoLaunch from "./utils/toggleAutoLaunch.js";
 
-const __dirname = import.meta.dirname;
+app.whenReady().then(async () => {
+  await toggleAutoLaunch(store.get("launchAStartup"));
+  await BrightnessController.setLevel(store.get("currentLevel"));
 
-const controller = new BrightnessController();
-
-app.on("ready", () => {
-  const iconPath = resolve(__dirname, "../assets", "iconTemplate.png");
-  const tray = new Tray(iconPath);
-
-  trayMenu(tray);
   globalShortcut.register("CommandOrControl+Y+B", async () => {
-    await controller.setLevel(100);
+    await BrightnessController.setLevel(100);
+  });
+
+  const luminit = new Luminit();
+
+  store.onDidAnyChange(() => {
+    luminit.updateMenu();
   });
 });
