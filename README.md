@@ -1,11 +1,11 @@
 <p align="center">
   <a href="https://www.tabnews.com.br">
-    <img src="https://imgur.com/qmYnQdN.jpg" height="170" width="175" alt="Elaina" />
+    <img src="./assets/iconTemplate.png" height="170" width="175" alt="Elaina" />
   </a>
 </p>
 
 <h1 align="center">
-    <a href="./assets/iconTemplate.png">Luminit</a>
+    <a href="https://github.com/HarukaYamamoto0/Luminit">Luminit</a>
 </h1>
 <p align="center">A simple tray-based application for controlling screen brightness on Linux. </p>
 
