@@ -20,7 +20,7 @@
 
 Luminit is a lightweight and intuitive Electron application for managing monitor brightness on xrandr-powered systems. I made it simple and user-friendly to control your monitor's brightness levels.
 
-I was going to make it work on Windows but I've had enough headaches, I've had too many problems creating this app, so I'm stopping it here.
+I can try to make it work on Windows later, after all I never learned how to lower the brightness there either lol
 
 ## Features
 
