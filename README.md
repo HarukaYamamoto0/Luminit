@@ -11,7 +11,7 @@
 
 <div align="center">
   <img src="https://img.shields.io/static/v1?label=license&message=MIT&color=blue&style=for-the-badge"/>
-  <img src="https://img.shields.io/static/v1?label=status&message=Finished%20enough&color=blue&style=for-the-badge"/>
+  <img src="https://img.shields.io/static/v1?label=status&message=construction&color=green&style=for-the-badge"/>
 </div>
 
 ---
